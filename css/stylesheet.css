@@ -1,0 +1,9 @@
+@import "fonts.css";
+
+html {
+    font-family: Bitstream Vera Sans Mono, Consolas, Menlo, monospace;
+}
+
+body {
+    font-size: 80%;
+}
