@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta name="generator" content="HTML Tidy for HTML5 for Linux/x86 version 5.7.28">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width">
+<title>CLAIRE</title>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+</head>
+<body>
+<p align="right"><a href="/3/claire.html" target="_blank">claire(3)</a> <a href="/7/claire.html" target="_blank">claire(7)</a></p>
+<br>
+<br>
+CLAIRE(7)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+Miscellaneous Information Manual&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; CLAIRE(7)<br>
+<br>
+<br>
+<br>
+<b>NAME</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;claire - a high-level functional and object-oriented language with rule<br>
+&nbsp; &nbsp; &nbsp; &nbsp;processing capabilities<br>
+<br>
+<b>DESCRIPTION</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;Visible slots in CLAIRE.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>active? (Compile)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;compiler.active? → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This boolean is set to true when the compiler is active (i.e.,&nbsp; compil-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ing&nbsp; CLAIRE&nbsp; code&nbsp; into C++ code). This is useful to introduce variants<br>
+&nbsp; &nbsp; &nbsp; &nbsp;between the compiled and interpreted code (such&nbsp; as&nbsp; different&nbsp; sizes).<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Note&nbsp; that&nbsp; there is another flag, loading?, to see if a file is loaded<br>
+&nbsp; &nbsp; &nbsp; &nbsp;by the compiler.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>arg1 / arg2 (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;arg1(x:Interval) → any<br />
+&nbsp; &nbsp; &nbsp; &nbsp;arg2(x:Interval) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;These slots contain respectively the minimal and maximal element&nbsp; of&nbsp; a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;CLAIRE interval.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>descendents (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;descendents(x:class) → set[class]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;For a class c, c.<i>descendents</i> is the set all classes that are under c in<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the hierarchy (transitive closure of the subclass relation).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>domain (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;domain(r:restriction) → list<br />
+&nbsp; &nbsp; &nbsp; &nbsp;domain(r:relation) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;A restriction is either a slot or a method. If r is a&nbsp; slot,&nbsp; domain(r)<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is&nbsp; the&nbsp; class on which r is defined. If r is a method, r.<i>domain</i> is the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list formed by the types of the parameters required by the method.&nbsp; For<br>
+&nbsp; &nbsp; &nbsp; &nbsp;a relation r, r.<i>domain</i> is the type on which r is defined.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>formula (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;formula(m:method) → lambda<br />
+&nbsp; &nbsp; &nbsp; &nbsp;formula(d:demon) → lambda<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>formula</i> gives the formula associated with the
+method/demon.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>funcall (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;funcall(m:method, x:any) → any<br />
+&nbsp; &nbsp; &nbsp; &nbsp;funcall(m:method, x:any, y:any) → any<br />
+&nbsp; &nbsp; &nbsp; &nbsp;funcall(m:method, x:any, y:any, z:any) → any<br />
+&nbsp; &nbsp; &nbsp; &nbsp;funcall(f:function,&nbsp; x:any, cx:class, crange:class) → any<br />
+&nbsp; &nbsp; &nbsp; &nbsp;funcall(f:function,&nbsp; x:any,&nbsp; cx:class, y:any, cy:class, crange:class) →<br>
+&nbsp; &nbsp; &nbsp; &nbsp;any<br />
+&nbsp; &nbsp; &nbsp; &nbsp;funcall(f:function,&nbsp; &nbsp;x:any,&nbsp; &nbsp;y:any,&nbsp; &nbsp;cy:class,&nbsp; &nbsp;z:any,&nbsp; &nbsp; cz:class,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;crange:class) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>funcall</i>&nbsp; provide an easy interface with external (C++) functions.&nbsp; <i>fun-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;call</i>(f,s1,x,s) applies an external function to an argument of sort&nbsp; s1.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The&nbsp; sort&nbsp; of the returned value must be passed as an argument (cf. Ap-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;pendix C).&nbsp; <i>funcall</i>(f,s1,x,s2,y,s) is the equivalent method in the two-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;arguments&nbsp; case,&nbsp; and&nbsp; <i>funcall</i>(f,s1,x,s2,y,s3,y,&nbsp; s)&nbsp; is the equivalent<br>
+&nbsp; &nbsp; &nbsp; &nbsp;method in the three-arguments case. Notice that the&nbsp; LAST&nbsp; argument&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the sort of the result, and that giving an erroneous sort argument will<br>
+&nbsp; &nbsp; &nbsp; &nbsp;likely produce a fatal error.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>funcall</i> also applies a method or a lambda to one or two arguments.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Last, <i>funcall</i> may be applied directly to a <b>function</b>, that is&nbsp; a&nbsp; primi-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tive entity that represents a C++ function. This method is provided for<br>
+&nbsp; &nbsp; &nbsp; &nbsp;expert users, since it is a system method that&nbsp; requires&nbsp; the&nbsp; type&nbsp; of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;each&nbsp; arguments (cx,cy, ...) and the type of the return value (crange),<br>
+&nbsp; &nbsp; &nbsp; &nbsp;which must be provided as classes. Failure to provide the&nbsp; proper&nbsp; sort<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(i.e.,&nbsp; this&nbsp; type information that is usually found in the <i>srange</i> slot<br>
+&nbsp; &nbsp; &nbsp; &nbsp;of the method) will provoke a system failure.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>imports (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;imports(m:module) → map_set<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;imports(m) is a map that helps to add specific library for each file of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the module.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>instances (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;instances(c:class) → type[set[c]]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns&nbsp; the set of all instances of c, created up to now (if c has not<br>
+&nbsp; &nbsp; &nbsp; &nbsp;been declared ephemeral).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>inverse (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;inverse(r:relation) → relation<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;r.<i>inverse</i> contains the inverse relation of r. If the range of r&nbsp; inher-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;its&nbsp; from bag then r is considered multi-valued by default (cf. Section<br>
+&nbsp; &nbsp; &nbsp; &nbsp;4.5). If r and its inverse are mono-valued then if r(x) =&nbsp; y&nbsp; then&nbsp; in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;verse(r)(y)&nbsp; =&nbsp; x. If they are multi-valued, then inverse(r)(y) returns<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the set (resp. list) of all x such that (y % r(x)).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>isa (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;isa(x:object) → class<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns the class of which x is an instance.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>loading? (Compile)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;compiler.loading? → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This boolean is set to true when the compiler is loading a file&nbsp; before<br>
+&nbsp; &nbsp; &nbsp; &nbsp;compiling it. This is useful to introduce variants between the compiled<br>
+&nbsp; &nbsp; &nbsp; &nbsp;and interpreted code (see also the <i>active</i>? flag)<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>made_of (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;made_of(m:module) → list[string]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;m.<i>made_of</i> contains the list of files that contain the code of the&nbsp; mod-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ule.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>open (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;open(c:class) → integer<br />
+&nbsp; &nbsp; &nbsp; &nbsp;open(r:relation) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x.<i>open</i> is a slot that tells the extensibility level of the class or re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;lation x.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;For a class, there are 6 values: -1 (system.close) means that the class<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cannot&nbsp; be extended neither with instances nor subclasses; 0 (abstract)<br>
+&nbsp; &nbsp; &nbsp; &nbsp;means that the class cannot have any instances; 1 (final) means that no<br>
+&nbsp; &nbsp; &nbsp; &nbsp;new&nbsp; subclasses&nbsp; could be created; 2 (default) is the default status, 3<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(system.open) means that the class is explicitly casted as&nbsp; extensible;<br>
+&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; (ephemeral) says that the class is a subset of ephemeral_object (the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list of instances is not maintained). Section 2.2 shows how&nbsp; to&nbsp; define<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the open status of a class using the proper declarations.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;For&nbsp; a relation: open = 1 means that some of the restrictions have been<br>
+&nbsp; &nbsp; &nbsp; &nbsp;compiled, hence no conflicting new restriction&nbsp; definition&nbsp; is&nbsp; allowed<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(cf. section 4.1 : extensibility status = closed); open = 2 means unde-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fined; open = 3 means that the extensibility status is "open", that new<br>
+&nbsp; &nbsp; &nbsp; &nbsp;restriction may be defined or re-defined at any time.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>parts, part_of (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;parts(m:module) → list<br />
+&nbsp; &nbsp; &nbsp; &nbsp;part_of(m:module) → module<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;m.part_of&nbsp; contains the module to which m belongs. parts is the inverse<br>
+&nbsp; &nbsp; &nbsp; &nbsp;of part_of : parts(m) is the set of submodules of m (in the module&nbsp; hi-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;erarchy).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>vars (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;system.vars → list[string]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;system.<i>vars</i>&nbsp; contains the list of arguments passed on the shell command<br>
+&nbsp; &nbsp; &nbsp; &nbsp;line (list of strings).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>verbose (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;system.verbose → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>verbose</i>(system) (also <i>verbose</i>() ) is the verbosity level&nbsp; that&nbsp; can&nbsp; be<br>
+&nbsp; &nbsp; &nbsp; &nbsp;changed. Note that trace(i:integer) sets this slot to i.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>version (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;system.version → float<br />
+&nbsp; &nbsp; &nbsp; &nbsp;compiler.version → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the&nbsp; version&nbsp; if&nbsp; a float number (&lt;version&gt;.&lt;revision&gt;) that is part of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the release number.<br>
+<br>
+<b>AUTHORS</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;Written by Yves Caseau and François Laburthe.<br>
+<br>
+<b>COPYRIGHT</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;Copyright © 1994-2023, Yves Caseau. All rights reserved.<br>
+<br>
+<b>SEE ALSO</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<a href="/3/claire.html" target="_blank">claire(3)</a><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Full documentation<br>
+&nbsp; &nbsp; &nbsp; &nbsp;&lt;<a href="https://sites.google.com/view/claire4/home" target="_blank">https://sites.google.com/view/claire4/home/a>&gt;<br>
+<br>
+<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CLAIRE(7)
+</body>
+</html>

@@ -1,0 +1,1315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta name="generator" content="HTML Tidy for HTML5 for Linux/x86 version 5.7.28">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width">
+<title>CLAIRE</title>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+</head>
+<body>
+<p align="right"><a href="/3/claire.html" target="_blank">claire(3)</a> <a href="/7/claire.html" target="_blank">claire(7)</a></p>
+<br>
+<br>
+CLAIRE(3)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+Library Functions Manual&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; CLAIRE(3)<br>
+<br>
+<br>
+<br>
+<b>NAME</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;claire - a high-level functional and object-oriented language with rule<br>
+&nbsp; &nbsp; &nbsp; &nbsp;processing capabilities<br>
+<br>
+<b>DESCRIPTION</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;Methods in CLAIRE.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>^ (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer ^ y:integer → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:float ^ y:float → float<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:list ^ y:integer → list<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:set ^ y:set → set<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x ^ y) returns x ^ y when x and y are numbers. If&nbsp; x&nbsp; is&nbsp; an&nbsp; integer,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;then y must be a positive integer, otherwise an error is raised.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(l&nbsp; ^&nbsp; y)&nbsp; skips the y first members of the list l. If the integer y is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;bigger than the length of the list l, the result&nbsp; is&nbsp; the&nbsp; empty&nbsp; list,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;otherwise&nbsp; it&nbsp; is&nbsp; the sublist starting at the y+1 position in l (up to<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the end).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(s1 ^ s2) returns the <i>intersection</i> of the two sets s1 and&nbsp; s2&nbsp; that&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the&nbsp; set&nbsp; of entities that belong to both s1 and s2. Other internal re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;strictions of the property ^ exist, where ^&nbsp; denotes&nbsp; the&nbsp; intersection<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(it is used for the type lattice)<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>^2 (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;^2(x:integer) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;^2(x) returns 2 to the power of x<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>% (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:any % y:class → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:any % y:collection → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x % y) returns&nbsp; (x ∈ y) for any entity x and any abstract set y. An ab-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;stract set is an object that represents a set, which is&nbsp; a&nbsp; type&nbsp; or&nbsp; a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list. Note that membership to a static type is actually "diet".<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>* (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer * y:integer → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:float * y:float → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x&nbsp; *&nbsp; y)&nbsp; returns&nbsp; x × y when x and y are numbers. If x is an integer,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;then y must also be an integer, otherwise an error is raised&nbsp; (explicit<br>
+&nbsp; &nbsp; &nbsp; &nbsp;conversion is supported with float!).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The&nbsp; operation&nbsp; * defines a commutative monoid, with associated divisi-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;bility operator divide? and associated division /.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>/ (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer / y:integer → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:float / y:float → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x / y) returns x ÷ y when x and y are numbers. If&nbsp; x&nbsp; is&nbsp; an&nbsp; integer,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;then&nbsp; y must also be an integer, otherwise an error is raised (explicit<br>
+&nbsp; &nbsp; &nbsp; &nbsp;conversion is supported with float!).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>+ (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer + y:integer → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:float + y:float → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x + y) returns x + y when x and y are numbers. If&nbsp; x&nbsp; is&nbsp; an&nbsp; integer,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;then y must be an integer, otherwise an error is raised (explicit con-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;version is supported with float!).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The operation + defines a group structure, with associated inverse -.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>- (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer - y:integer → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:float - y:float → float<br>
+&nbsp; &nbsp; &nbsp; &nbsp;-(x:integer) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;-(x:float) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x - y) returns x − y when x and y are numbers. -(x) returns the&nbsp; oppo-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;site of x.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>/+ (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:list /+ y:list → list<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:string /+ y:string → string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:symbol /+ y:(string U symbol) → symbol<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x&nbsp; /+&nbsp; y) returns the <i>concatenation</i> of x and y ( represents the <i>append</i><br>
+&nbsp; &nbsp; &nbsp; &nbsp;operation). Concatenation is an associative operation that&nbsp; applies&nbsp; to<br>
+&nbsp; &nbsp; &nbsp; &nbsp;strings,&nbsp; lists and symbols. It is not represented with + because it is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;not commutative.&nbsp; When two symbols are concatenated, the resulting sym-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;bol&nbsp; belongs&nbsp; to&nbsp; the&nbsp; namespace (module) of the first symbol, thus the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;second symbol is simply used as a string. By extension, a symbol can be<br>
+&nbsp; &nbsp; &nbsp; &nbsp;concatenated directly with a string.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>.., -- (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;-- x:integer .. y:integer → Interval<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x&nbsp; .. y) returns the interval {z | x ≤ z ≤ y}. Intervals are only sup-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ported for integers, in CLAIRE v3.0. Notice that (3 .. 1)&nbsp; returns&nbsp; the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;empty&nbsp; set,&nbsp; which is a type. The new method (x – y) is an explicit in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;terval constructor (it produces an&nbsp; error&nbsp; if&nbsp; the&nbsp; first&nbsp; argument&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;larger&nbsp; than&nbsp; the second).The result is an object from the class <i>Inter-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;val</i>, which is a type.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>=, != (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:any = y:any → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:any != y:any → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x = y) returns true if x is equal to y and nil otherwise. Equality&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;defined&nbsp; in Section 2: equality is defined as identity for all entities<br>
+&nbsp; &nbsp; &nbsp; &nbsp;except strings, lists and sets. For lists, sets and&nbsp; strings,&nbsp; equality<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is&nbsp; defined&nbsp; recursively&nbsp; as&nbsp; follows: x and y are equal if they are of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;same size <i>n</i> and if x[i] is equal to y[i] for all <i>i</i> in (1 .. <i>n</i>).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x != y) is simply the negation of (x = y).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>=type? (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;=type?(x:any, y:any) → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns true if x and y denote the same type. For example&nbsp; =type?(bool-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ean,&nbsp; {true,&nbsp; false})&nbsp; returns true because final(boolean) was declared<br>
+&nbsp; &nbsp; &nbsp; &nbsp;after the two instances true and false&nbsp; were&nbsp; created,&nbsp; so&nbsp; the&nbsp; system<br>
+&nbsp; &nbsp; &nbsp; &nbsp;knows that no other instances of boolean may ever be created in the fu-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ture. This equality is stronger than set equality in the sense that the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;system&nbsp; answers&nbsp; true&nbsp; if it knows that the set equality will hold ever<br>
+&nbsp; &nbsp; &nbsp; &nbsp;after.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>&lt;=, &gt;=, &lt;, &gt; (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer &lt;= y:integer → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:float &lt;= y:float → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:char &lt;= y:char → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:string &lt;= y:string → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:type &lt;= y:type → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:X &lt; y:X → boolean for X = integer, float, char and string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:X &gt; y:X → boolean for X = integer, float, char and string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:X &gt;= y:X → boolean for X = integer, float, char and string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The basic order property is &lt;=. It is defined on&nbsp; integers&nbsp; and&nbsp; floats<br>
+&nbsp; &nbsp; &nbsp; &nbsp;with&nbsp; the obvious meaning. On characters, it is the ASCII order, and on<br>
+&nbsp; &nbsp; &nbsp; &nbsp;strings it is the lexicographic order induced by&nbsp; the&nbsp; ASCII&nbsp; order&nbsp; on<br>
+&nbsp; &nbsp; &nbsp; &nbsp;characters.&nbsp; The order on types is the inclusion: ((x &lt;= y) if all mem-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;bers of type x are necessarily members of type y).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(x &lt; y), (x &gt; y) and (x &gt;= y) are only defined for&nbsp; numbers,&nbsp; char&nbsp; and<br>
+&nbsp; &nbsp; &nbsp; &nbsp;strings with the usual meaning.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>&lt;&lt;, &gt;&gt; (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;l:list &lt;&lt; n:integer → list<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer &lt;&lt; n:integer → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x:integer &gt;&gt; n:integer → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;l:string &lt;&lt; n:integer → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(l&nbsp; &lt;&lt;&nbsp; n)&nbsp; left-shifts&nbsp; the&nbsp; list l by n units, which means that the n<br>
+&nbsp; &nbsp; &nbsp; &nbsp;first members of the list are removed. This is a method with a side-ef-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fect since the returned value is the original list, which has been mod-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ified. (x &lt;&lt;n) and (x &gt;&gt; n) are the result of shifting&nbsp; the&nbsp; integer&nbsp; x<br>
+&nbsp; &nbsp; &nbsp; &nbsp;seen&nbsp; as a bitvector respectively to the left and to the right by n po-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sitions.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(s &lt;&lt; n) removes the n first characters of a string s. This is an effi-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cient&nbsp; but destructive operation (no allocation, but the initial string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is lost).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>@ (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;vp:property @ t:type → entity<br>
+&nbsp; &nbsp; &nbsp; &nbsp;p:property @ l:list[type] → entity<br>
+&nbsp; &nbsp; &nbsp; &nbsp;t:type @ p:parameter → type<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(p @ t) returns the restriction of p that applies to arguments of&nbsp; type<br>
+&nbsp; &nbsp; &nbsp; &nbsp;t.&nbsp; When&nbsp; no&nbsp; restrictions&nbsp; applies, the value nil is returned. If more<br>
+&nbsp; &nbsp; &nbsp; &nbsp;than one restriction applies, the value&nbsp; unknown&nbsp; is&nbsp; returned.&nbsp; Notice<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that&nbsp; the form p@t (without blank spaces) is used to print the restric-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tion and also in the control structure <property>@<class>(...).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(p @ list(t1,..tn)) is similar and returns the restriction&nbsp; of&nbsp; p&nbsp; that<br>
+&nbsp; &nbsp; &nbsp; &nbsp;applies to arguments in t1 X... X tn.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(t&nbsp; @&nbsp; p) returns the type that is inferred for x.p when x is an object<br>
+&nbsp; &nbsp; &nbsp; &nbsp;of type t and p a parameter (read-only property).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>abs (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;abs(x:integer) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;abs (x:float) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;abs(x) returns the absolute value (-(x) is x is negative, x otherwise).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>abstract (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;abstract(c:class) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;abstract(p:property) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;abstract(c) forbids the class c to have any instance.&nbsp; abstract(p)&nbsp; de-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fines p as an extensible property. This is used by the compiler to pre-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;serve the ability to add new restrictions to p in the future that would<br>
+&nbsp; &nbsp; &nbsp; &nbsp;change its semantics on existing classes. By default, a property is ex-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tensible until it is compiled. A corollary is that function calls&nbsp; that<br>
+&nbsp; &nbsp; &nbsp; &nbsp;use extensible properties are compiled using late binding.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>add (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;add(s:set,x:any) → set<br>
+&nbsp; &nbsp; &nbsp; &nbsp;add(l:list,x:any) → list<br>
+&nbsp; &nbsp; &nbsp; &nbsp;add(p:relation,x:object,y:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>add(s,x)</i>&nbsp; adds&nbsp; x&nbsp; to the set s. The returned value is the set s ∪ {x}.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This method may modify the set s but not necessarily. When x is a list,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;add(l,x) inserts x at the end of l. The returned value is also the list<br>
+&nbsp; &nbsp; &nbsp; &nbsp;obtained by appending (x) to l, and l may be modified as a&nbsp; result&nbsp; but<br>
+&nbsp; &nbsp; &nbsp; &nbsp;not&nbsp; necessarily.&nbsp; The pseudo-destructive behavior of <i>add</i> is similar to<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that of <i>add*</i>, which is described below.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>add(p,x,y)</i> is equivalent to <i>p(x) :add y</i> (This form is interesting&nbsp; when<br>
+&nbsp; &nbsp; &nbsp; &nbsp;one wants to write such an expression for a variable p)<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>add* (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;add*(l1:list, l2:list) → list<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>add*(l1,l2)</i>&nbsp; returns&nbsp; the concatenated list l1 . l2, but it is destruc-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tive: it uses l1 as the data structure on which to perform the concate-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nation.&nbsp; Hence, the original l1 is no longer available after the method<br>
+&nbsp; &nbsp; &nbsp; &nbsp;add* has been called.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>and (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;and(x :integer,y :integer) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>and(x,y)</i> returns the bitwise intersection&nbsp; of&nbsp; two&nbsp; integers&nbsp; (seen&nbsp; as<br>
+&nbsp; &nbsp; &nbsp; &nbsp;bitvectors).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>apply (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;apply(p:property, l:list) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;apply(f:external_function, ls:list[class], lx:list) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;apply(la:lambda, lx:list) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;apply(m:method, lx:list) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>apply(p,l)</i> is equivalent to a function call where the selector is p and<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the argument list is l. For instance, apply(+,list(1,2)) = (1&nbsp; +&nbsp; 2)&nbsp; =<br>
+&nbsp; &nbsp; &nbsp; &nbsp;call(+,1,2).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>apply(f,ls,l)</i>&nbsp; applies&nbsp; the function f to the argument list l, where ls<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is the list of sort of the arguments and the result (i.e. length(ls)&nbsp; =<br>
+&nbsp; &nbsp; &nbsp; &nbsp;length(l)&nbsp; +&nbsp; 1).&nbsp; For instance, if f is the external function that de-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fines + @ integer, apply(f,list(integer,integer,integer),list(1,2)) = 1<br>
+&nbsp; &nbsp; &nbsp; &nbsp;+ 2.
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>apply(la,lx)</i>&nbsp; applies&nbsp; the lambda expression to the argument list.&nbsp; <i>ap-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ply(m,lx)</i> applies the method to the argument list.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>array! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;array!(x:list,t:type) → type[t[]]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;creates a copy of the list x that is represented as an array. The&nbsp; mem-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ber&nbsp; type&nbsp; must&nbsp; be given as a parameter t and an error will occur if a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;member of the list does not belong to t.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>begin (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;begin(m:module) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sets the current namespace to m (a module).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>but (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;but(s:any,x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Returns the set of members of s that are different from x.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>car, cdr (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;car(l:list) → type[member(l)]<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cdr(l:list) → type[l]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;These two classical LISP methods return the head of the list, e.g. l[1]<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(for&nbsp; car) and its tail, e.g. the list l starting at its second element<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(for cdr).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>call (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;call(p:property, l:listargs) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;call(x:lambda, l:listargs) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>call</i>(X,x1,x2 ,...,xn) is equivalent to apply(X,list(x1,x2 ,...,xn)).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>cast! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cast!(s:bag,t:type) → bag<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>cast</i>(s,t) sets the member type of the bag s to&nbsp; t.&nbsp; This&nbsp; is&nbsp; a&nbsp; system<br>
+&nbsp; &nbsp; &nbsp; &nbsp;method,&nbsp; that&nbsp; should not be used lightly since it does not perform any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;check and may yield nasty errors. The proper way to cast a&nbsp; bag&nbsp; is&nbsp; to<br>
+&nbsp; &nbsp; &nbsp; &nbsp;use "as": (s as t).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>char! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;char!(n:integer) → char<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>char</i>!(n) returns the character which ASCII code is n.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>class! (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;class!(x:any) → class<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>class</i>!(x)&nbsp; returns&nbsp; the&nbsp; intersection of all classes y such that x <= y<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(Such an intersection always exists since classes are&nbsp; organized&nbsp; in&nbsp; a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;lattice). Hence, if c is a class class!(c)=c.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>close (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;close(m:module) → module<br>
+&nbsp; &nbsp; &nbsp; &nbsp;close(c:class) → class<br>
+&nbsp; &nbsp; &nbsp; &nbsp;close(e:exception) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;close(v:global_variable) → global_variable<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The&nbsp; method&nbsp; close is called each time an object is created. It is exe-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cuted and returns the created object. It can sometimes be very&nbsp; helpful<br>
+&nbsp; &nbsp; &nbsp; &nbsp;to&nbsp; define&nbsp; new restrictions, they will be automatically called when an<br>
+&nbsp; &nbsp; &nbsp; &nbsp;instance is created.&nbsp; Exceptions are a special case: raising an&nbsp; excep-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tion&nbsp; is&nbsp; done&nbsp; internally&nbsp; by&nbsp; creating&nbsp; an instance of exception. The<br>
+&nbsp; &nbsp; &nbsp; &nbsp;method close is responsible for looking for the innermost handler, etc.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>cons (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cons(x:any, l:list) → list<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This traditional method appends x at the beginning of l and returns the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;constructed list.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>contradiction!() (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;contradiction!() → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This&nbsp; method creates a contradiction, which is an instance of the class<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>contradiction</i>. It is equivalent to <i>contradiction</i>() but&nbsp; is&nbsp; more&nbsp; effi-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cient and should be preferred.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>copy (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;copy(x:object) → object<br>
+&nbsp; &nbsp; &nbsp; &nbsp;copy(s:bag) → bag<br>
+&nbsp; &nbsp; &nbsp; &nbsp;copy(a:array) → array<br>
+&nbsp; &nbsp; &nbsp; &nbsp;copy(s:string) → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>copy</i>(x)&nbsp; returns a duplicate of the object x. It is not recursive : the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;slots of the copied object are shared with that of&nbsp; the&nbsp; original&nbsp; one.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Similarly,&nbsp; the&nbsp; copy of a bag (a set or a list) returns a fresh set or<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list with the same elements and the copy of a string is ... a&nbsp; copy&nbsp; of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the string.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>cos (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cos(x:float) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>cos(x)</i> returns the cosine of x (x is expressed in radians).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>date! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;date!(i:integer) → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>date!</i>(i)&nbsp; returns&nbsp; the&nbsp; date, using the integer parameter i to indicate<br>
+&nbsp; &nbsp; &nbsp; &nbsp;whether the full date is needed or only the day or the&nbsp; time.&nbsp; For&nbsp; in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;stance<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;date!(0) = "Thu Mar 9 08:04:22 2000"<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;date!(1) = "Thu Mar 9 2000"<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;date!(2) = "08:04:22"<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>delete (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;delete(p:relation, x:object, y:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;delete(s:bag, x:any) → bag<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>delete</i>(s,x) returns s if x is not in s and the list (resp. set) s with-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;out the first (resp. only) occurrence of x otherwise. <i>delete(p,x,y)</i>&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;equivalent to <i>p(x) :delete y</i>. This is a destructive method in the sense<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that it modifies its input argument. The&nbsp; proper&nbsp; way&nbsp; to&nbsp; use&nbsp; delete,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;therefore,&nbsp; is&nbsp; either&nbsp; destructive&nbsp; (<i>l&nbsp; :delete&nbsp; x</i>) or non-destructive<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>(delete(copy(l),x)</i>).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>difference (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;difference(s:set, t:set) → set<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>difference</i>(s,t) returns the difference set s - t, that is&nbsp; the&nbsp; set&nbsp; of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;all elements of s which are not elements of t.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>end_of_string (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;end_of_string() → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>end_of_string</i>()&nbsp; returns the string containing everything that has been<br>
+&nbsp; &nbsp; &nbsp; &nbsp;printed since the last call to print_in_string().<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>erase (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;erase(a:table) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;erase(r:property,x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>erase</i>(a) removes all value pairs contained in&nbsp; the&nbsp; table.&nbsp; This&nbsp; means<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that,&nbsp; on&nbsp; one&nbsp; hand, the value a[x] becomes unknown for each object x,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;and also that any references to an object from the table’s domain or an<br>
+&nbsp; &nbsp; &nbsp; &nbsp;associated&nbsp; value&nbsp; is&nbsp; lost,&nbsp; which may be useful to allow for complete<br>
+&nbsp; &nbsp; &nbsp; &nbsp;garbage collection.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>erase</i>(p,x) removes the value associated to x with the property&nbsp; p.&nbsp; The<br>
+&nbsp; &nbsp; &nbsp; &nbsp;default value, or the unknown value, is placed in the slot x.p, and the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;inverse if updated (if any).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>exception! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;exception!() → exception<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>exception!</i>() returns the last exception that was raised.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>exit (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;exit(n:integer) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>exit</i>(n) stops CLAIRE running and returns&nbsp; to&nbsp; the&nbsp; hosting&nbsp; system&nbsp; the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;value&nbsp; n.&nbsp; What&nbsp; can&nbsp; happen&nbsp; next is platform-dependent. For instance,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;exit(0) exits CLAIRE with a clean stop, while exit(-1) returns an error<br>
+&nbsp; &nbsp; &nbsp; &nbsp;so&nbsp; the&nbsp; go debugging platform gives may be used (and give some context<br>
+&nbsp; &nbsp; &nbsp; &nbsp;about the call stack).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>factor? (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;factor?(x:integer, y:integer) → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>factor</i>?(x,y) returns true if x is a multiple of y.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>fcall (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fcall(f:external_function, s1:class, x:any, s:class) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fcall(f:external_function, s1:class, x:any, s2:class, y:any, s:class) →<br>
+&nbsp; &nbsp; &nbsp; &nbsp;any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fcall(f:external_function, s1:class, x:any, s2:class, y:any, s3:class,z<br>
+&nbsp; &nbsp; &nbsp; &nbsp;:class,s :class) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>fcall</i>&nbsp; provide&nbsp; an&nbsp; easy&nbsp; interface&nbsp; with&nbsp; external&nbsp; (C++) &nbsp; functions.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;f<i>call</i>(f,s1,x,s) applies an external function to an argument of sort s1.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The sort of the returned value must be passed as an argument&nbsp; (cf.&nbsp; Ap-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;pendix C). .&nbsp; <i>fcall</i>(f,s1,x,s2,y,s) is the equivalent method in the two-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;arguments case.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>final (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;final (c:class) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;final (p:property) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;final(c) forbids the user to create any subclass of the class c.&nbsp; If&nbsp; c<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is a constant class, this is taken as a "diet" compiling directive.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;final(p) change the extensibility status of the property p (represented<br>
+&nbsp; &nbsp; &nbsp; &nbsp;with the slot open) so that the property p becomes closed, which&nbsp; means<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that&nbsp; a&nbsp; new restriction may no longer be added if it causes an inheri-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tance conflict.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>finite? (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;finite?(t:type) → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;finite?(t) returns true if the type t represents a finite set. Set&nbsp; it-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;eration (with the for loop) can only be done over finite sets<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>float! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;float!(x:integer) → float<br>
+&nbsp; &nbsp; &nbsp; &nbsp;float!(x:string) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;transforms an integer or a string into a float.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>flush (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;flush(p:port) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Communications with ports are buffered, so it can happen that some mes-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sages wait in a queue for others to come, before being actually sent to<br>
+&nbsp; &nbsp; &nbsp; &nbsp;their destination port. <i>flush(p)</i> for input and output ports and empties<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the buffer associated with p, by physically sending the print&nbsp; messages<br>
+&nbsp; &nbsp; &nbsp; &nbsp;to their destination.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>fopen, fclose (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fopen(s1:string,s2:string) → port<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fclose(p:port) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>fopen</i>&nbsp; returns a port that is handle on the file or external device as-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sociated with it. The first string argument is the name&nbsp; of&nbsp; the&nbsp; file,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the&nbsp; second is a combination of several control characters, among which<br>
+&nbsp; &nbsp; &nbsp; &nbsp;'r' allows reading the file, 'w' (over)writing the file and 'a' append-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ing&nbsp; what will be write at the end of the file. Other possibilities may<br>
+&nbsp; &nbsp; &nbsp; &nbsp;be offered, depending on the underlying possibilities. Such other&nbsp; pos-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sibilities are platform-dependent.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>format (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;format(string,list) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This method does the same thing as printf, except that there are always<br>
+&nbsp; &nbsp; &nbsp; &nbsp;two arguments, thus the arguments must be replaced by an explicit list.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>gensym (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;gensym() → symbol<br>
+&nbsp; &nbsp; &nbsp; &nbsp;gensym(s:string) → symbol<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>gensym()</i> generates randomly a new symbol. <i>gensym(s)</i> generates&nbsp; randomly<br>
+&nbsp; &nbsp; &nbsp; &nbsp;a new symbol that begin with s.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>get (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get(p:property + slot, x:object) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get(a:table, x:any) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get(s:string, c:char) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get(l:list, x:any) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get(m:module) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>get(p,x)</i>&nbsp; is&nbsp; equivalent&nbsp; to&nbsp; <i>p(x)</i>, but without any verification on <i>un-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;known</i>. So does <i>get(a,x)</i> for a table.<i>get(s,x)</i> returns i such that s[i]=x<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(if&nbsp; no&nbsp; such&nbsp; i&nbsp; exists,&nbsp; 0&nbsp; is&nbsp; returned).&nbsp; So&nbsp; does&nbsp; <i>get(l,x)</i>&nbsp; for a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list.<i>get(m)</i> is equivalent for a module m to <i>(load(m), open(m))</i><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>get_module (Core, Optimize)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get_module(s:symbol) → module<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get_module(x:thing) → module<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>get_module</i> returns the module where the identifier s was created.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>get_value (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get_value(s:string) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get_value(m:module, s:string) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns the object whose name corresponds to the string;&nbsp; if&nbsp; a&nbsp; module<br>
+&nbsp; &nbsp; &nbsp; &nbsp;argument&nbsp; is&nbsp; passed,&nbsp; the&nbsp; associated symbol is sought in the module’s<br>
+&nbsp; &nbsp; &nbsp; &nbsp;namespace, otherwise the module claire is used by default. To find&nbsp; the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;value&nbsp; associated&nbsp; to&nbsp; a&nbsp; string&nbsp; within the current module, simply use<br>
+&nbsp; &nbsp; &nbsp; &nbsp;get_value(module!(),s).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>getc (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;getc(p:port) → char<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>getc(p)</i> returns the next character read on port p.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>getenv (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;getenv(s:string) → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>getenv(s)</i> returns the value of the environment variable s if it&nbsp; exists<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(an&nbsp; error occurs otherwise since an attempt is made to create a string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;from the NULL value that is returned by the environment).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>hash (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;hash(l:list,x:any) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;hash(n:integer,x:any) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>hash(l,x)</i> returns an integer between 1 and length(l) that&nbsp; is&nbsp; obtained<br>
+&nbsp; &nbsp; &nbsp; &nbsp;through&nbsp; generic&nbsp; hashing. To obtain the best dispersion, one may use a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list  of  size 2<sup>i</sup>-3. This function can be used to implement&nbsp; hash&nbsp; tables<br>
+&nbsp; &nbsp; &nbsp; &nbsp;in&nbsp; CLAIRE;&nbsp; it used to be the basis of the table  implementation  before<br>
+&nbsp; &nbsp; &nbsp; &nbsp;version 4.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>Id (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Id(x:any) → type[x]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>Id(x)</i> returns x. Id has a special behavior when compiled which makes it<br>
+&nbsp; &nbsp; &nbsp; &nbsp;useful.&nbsp; The&nbsp; argument is evaluated before being compiled. The intended<br>
+&nbsp; &nbsp; &nbsp; &nbsp;use is with global variables: the compiler uses the actual value of the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;variable&nbsp; instead&nbsp; of&nbsp; a reference to the global variable. This is very<br>
+&nbsp; &nbsp; &nbsp; &nbsp;convenient to introduce parameters that are defined outside the&nbsp; module<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that is being compiled.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This&nbsp; is&nbsp; also&nbsp; used to tell the compiler that an iteration should make<br>
+&nbsp; &nbsp; &nbsp; &nbsp;explicit use of all iterations rules that may apply to some&nbsp; subclasses<br>
+&nbsp; &nbsp; &nbsp; &nbsp;of the set expression that is being iterated.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>inherit? (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;inherit?(c1:class, c2:class) → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>inherit</i>?(c1,c2) returns (c2 % ancestors(c1))<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>instanced (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;instanced(c:class) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;instanced(c) tells CLAIRE to maintain the list of instances (e.g, c.in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;stances).&nbsp; &nbsp;This is not necessary if c inherits from things, but other-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;wise, CLAIRE will assume by default that the&nbsp; extension&nbsp; is&nbsp; not&nbsp; kept.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This choice has a strong impact:<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;· if the extension is kept, the class may be used as a set but&nbsp;  ob-<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;jects will not be garbage collected (explicit kill is necessary)<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;·&nbsp; otherwise,&nbsp; the&nbsp; class&nbsp; cannot&nbsp; be enumerated (like in "for c in<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;class show(c)") but garbage collection is implicit (memory&nbsp; is&nbsp; re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;claimed as soon as the object is no longer used).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>integer! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;integer!(s:string) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;integer!(f:float) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;integer!(c:char) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;integer!(l:set[(0 .. 29)]) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;integer!(s:symbol) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>integer!(s)</i>&nbsp; returns&nbsp; the&nbsp; integer&nbsp; denoted&nbsp; by&nbsp; the string s if s is a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string formed by a sign and a succession of digits, <i>integer!(f)</i> returns<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the&nbsp; lower&nbsp; integer&nbsp; approximation&nbsp; of f, integer!(c) returns the ASCII<br>
+&nbsp; &nbsp; &nbsp; &nbsp;code of c and&nbsp; integer!(l)&nbsp; returns&nbsp; the&nbsp; integer&nbsp; represented&nbsp; by&nbsp; the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;bitvector&nbsp; l,&nbsp; i.e.&nbsp; the sum of all 2<sup>i</sup> for i in l. Last, integer(s) re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;turns a unique index associated to a symbol s.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>invert (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;invert(r:relation,x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>invert(r,x)</i> return r<sup>-1</sup>(x) assuming that r has an inverse.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>kill, kill! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;kill(x:object) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;kill(x:class) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;kill!(x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;kill is used to remove an object from the&nbsp; database&nbsp; of&nbsp; the&nbsp; language.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>kill</i>&nbsp; does&nbsp; it properly, removing the object from all the relation net-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;work but without deallocating. <i>kill!</i> is&nbsp; more&nbsp; brutal&nbsp; and&nbsp; deallocates<br>
+&nbsp; &nbsp; &nbsp; &nbsp;without any checking.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>known? (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;known?(p:relation, x:object) → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;known?(x:any) → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>known?(p,x)</i>&nbsp; is&nbsp; equivalent&nbsp; to <i>get(p,x) != unknown</i>. The general method<br>
+&nbsp; &nbsp; &nbsp; &nbsp;known? simply returns true whenever the object exists in the database.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>last (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;last(l:list) → type[member(l)]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>last(l)</i> returns <i>l[length(l)]</i><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>length (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;length(l:bag) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;length(a:array) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;length(l:string) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns the length of an array, a bag or a string. The length of a list<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is&nbsp; not&nbsp; its&nbsp; <i>size</i>!&nbsp; The following is true: length(set!(l)) = size(l) =<br>
+&nbsp; &nbsp; &nbsp; &nbsp;size(l) = size(set!(l)).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>list! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list!(a:array) → type[member_type(a)[]]<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list!(s:set) → type[list[member(s)]]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;For any array or set x, <i>list!(s)</i> transforms x into a list. If&nbsp; x&nbsp; is&nbsp; a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;set, the order of the elements in the list can be anything.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>load, sload, oload, eload (Reader)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;load(s:string) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sload(s:string) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;oload(s:string) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;eload(s:string) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;load(m:module) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sload(m:module) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;oload(m:module) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;These&nbsp; methods&nbsp; load&nbsp; a file (or the files associated to a module). The<br>
+&nbsp; &nbsp; &nbsp; &nbsp;difference between them is that <i>load(s)</i> reads and evaluates all the in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;structions&nbsp; found&nbsp; in the file named s, whereas <i>sload(s)</i> reads, prints,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;evaluates and prints the results of the evaluation of all the&nbsp; instruc-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tions&nbsp; found&nbsp; in&nbsp; the&nbsp; file named s. <i>oload(s)</i> is similar to load(s) but<br>
+&nbsp; &nbsp; &nbsp; &nbsp;also optimizes the methods that are newly defined&nbsp; by&nbsp; substituting&nbsp; an<br>
+&nbsp; &nbsp; &nbsp; &nbsp;optimized&nbsp; version&nbsp; of&nbsp; the&nbsp; lambda abstraction. <i>eload(s)</i> is similar to<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>load(s)</i> but assumes that the file only contains&nbsp; expressions&nbsp; (such&nbsp; as<br>
+&nbsp; &nbsp; &nbsp; &nbsp;f(1,2)).&nbsp; This is convenient for loading data input files using a func-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tional format.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>log (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;log(x:float) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;computes log(x) – base <i>e</i>.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>make_array (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_array(n:integer,t:type,x:any) → type[t[]]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns an array of length n filled with x. The parameter t is the mem-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ber_type&nbsp; of&nbsp; the array, thus x must belong to t, as well as any future<br>
+&nbsp; &nbsp; &nbsp; &nbsp;value that will be put in the array. Note that x is shared for all mem-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;bers of the array, which cause a problem if updates can be performed.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>make_list (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_list(n:integer,x:any) → type[list[x]]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns&nbsp; a&nbsp; list&nbsp; of&nbsp; length&nbsp; n&nbsp; filled&nbsp; with x (e.g., make_list(3,0) =<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list&lt;any&gt;(0,0,0)). This is a typed list with member type any,&nbsp; thus&nbsp; it<br>
+&nbsp; &nbsp; &nbsp; &nbsp;can be updated.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>make_string (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_string(i:integer, c:char) → string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_string(s:symbol) → string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_string(l:list) → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_string(i,c) returns a string of length i filled with the character<br>
+&nbsp; &nbsp; &nbsp; &nbsp;c.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_string(s) returns a string denoting the same identifier. If&nbsp; s&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;given&nbsp; in&nbsp; the&nbsp; qualified form (module/identifer), than the result will<br>
+&nbsp; &nbsp; &nbsp; &nbsp;contain the name of the module ("module/identifier").<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;make_string(l) creates a string from the list of its characters.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>member (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;member(x:type) → type<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;member(x) returns the type of all instances of type x, assuming that&nbsp; x<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is a CLAIRE type which contains objects y such that other objects z can<br>
+&nbsp; &nbsp; &nbsp; &nbsp;belong to. If this is the case, member(x) is a valid type for all&nbsp; such<br>
+&nbsp; &nbsp; &nbsp; &nbsp;z, otherwise the returned value is the empty set. For instance, if x is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list[integer], all instances of x are lists that contain integers,&nbsp; and<br>
+&nbsp; &nbsp; &nbsp; &nbsp;all&nbsp; members&nbsp; of these lists are integers. Therefore, member(list[inte-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ger]) is integer.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>member_type (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;member_type(x:array) → type<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>member_type(x)</i> returns the type of all members of the array&nbsp; x.&nbsp; There-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;fore, member(a) = member_type(a) for an array a.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>methods (Reader)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;methods(d:class,r:class) → set[method]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>methods(d,r)</i>&nbsp; returns the set of methods with a range included in r and<br>
+&nbsp; &nbsp; &nbsp; &nbsp;a domain which is a tuple which first component is included in d.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>min / max (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;min(m:method[domain:tuple(X,X), range:boolean],<br>
+&nbsp; &nbsp; &nbsp; &nbsp;l:set[X] U list[X]) → type[X]<br>
+&nbsp; &nbsp; &nbsp; &nbsp;min(x:integer,y:integer) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;max(x:integer,y:integer) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;given an order function (m(x,y) returns true if x &lt;= y) and a bag, this<br>
+&nbsp; &nbsp; &nbsp; &nbsp;function&nbsp; returns&nbsp; the&nbsp; minimum&nbsp; of&nbsp; the&nbsp; bag, according to this order.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;min/max on integer returns the smallest/largest of two integers.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>mod (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;mod(x:integer, y:integer) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>mod(x,y)</i> is the rest of the Euclidean division of x by y.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>module! (Core, Optimize)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;module!() → module<br>
+&nbsp; &nbsp; &nbsp; &nbsp;module!(r:restriction) → module<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>module!</i>(r) returns the module where the method r was created.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>module</i>!() (= system.module! ) returns the current module, that&nbsp; is&nbsp; the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;module into which the reader is currently reading.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>new (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;new(c:class) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;new(c:class, s:symbol) → thing<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>new</i>&nbsp; is&nbsp; the&nbsp; generic instantiation method. <i>new(c)</i> creates an object of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;class c (It is equivalent to c()). <i>new(c,s)</i> creates an object of&nbsp; class<br>
+&nbsp; &nbsp; &nbsp; &nbsp;c with name s.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>not (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;not(x:any) → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>not(x)</i>&nbsp; returns&nbsp; false&nbsp; for&nbsp; all&nbsp; x except false, the empty set and the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;empty list.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>nth, nth=, nth+, nth- (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth(a:table, x:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth(x:integer, i:integer) → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth(l:bag, i:integer) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth(a:array, i:integer) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth(s:string, i:integer) → char<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth=(a:table, x:any, y:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth=(a:array, x:any, y:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth=(l:list, i:integer, x:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth=(s:string, i:integer, x:char) → char<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth+(l:list, i:integer, x:any) → bag<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth-(l:list, i:integer) → bag<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth_put(l:string, i:integer, x:char) → string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nth_get(l:string, i:integer) → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>nth</i> is used for accessing elements of structured data: nth(l,i) is&nbsp; the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;i<sup>th</sup>&nbsp; element&nbsp; of the bag l, nth(s,i) is the i<sup>th</sup> character of the string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;s. For tables, nth(a,x) is equivalent to a[x], even when x&nbsp; is&nbsp; not&nbsp; an<br>
+&nbsp; &nbsp; &nbsp; &nbsp;integer.&nbsp; Finally,&nbsp; nth also deals with the bitvector representation of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;integers: nth(x,i) returns true if the i<sup>th</sup> digit of x in base 2 is 1.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>nth</i>= is used for changing an element at a certain place&nbsp; to&nbsp; a&nbsp; certain<br>
+&nbsp; &nbsp; &nbsp; &nbsp;value.&nbsp; In all the restrictions <i>nth</i>=<i>(s,i,x)</i> means: change the i<sup>th</sup> value<br>
+&nbsp; &nbsp; &nbsp; &nbsp;of s to x.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;There exists two other ways of modifying the values in such data struc-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tures:&nbsp; <i>nth</i>+&nbsp; and <i>nth</i>-. <i>nth</i>+ uses the same syntax as <i>nth</i>= : <i>nth</i>+<i>(l,i,x)</i><br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns a list (that may be l) where x has been inserted in the i<sup>th</sup> po-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sition.&nbsp; By&nbsp; extension,&nbsp; <i>i</i> may be <i>length(l)</i> + <i>1</i>, in which case <i>x</i> is in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;serted at the end of <i>l</i>.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>nth</i>- is used for removing an element. <i>nth</i>-<i>(s,i)</i> returns&nbsp; a&nbsp; value&nbsp; that<br>
+&nbsp; &nbsp; &nbsp; &nbsp;differs from s only in that the i<sup>th</sup> place has been erased.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Strings&nbsp; in&nbsp; CLAIRE can be used as buffers (arrays of characters) using<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the methods <i>nth_get</i> and <i>nth_put</i> that do not perform bound checking. The<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string does not need to be terminated by a null character and any posi-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;tion may be accessed. This use of strings&nbsp; may&nbsp; provoke&nbsp; severe&nbsp; errors<br>
+&nbsp; &nbsp; &nbsp; &nbsp;since&nbsp; there&nbsp; are&nbsp; no bound checks, thus it should be used scarcely and<br>
+&nbsp; &nbsp; &nbsp; &nbsp;with a lot of care.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>occurrence (Language)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;occurrence(exp:any, x:variable) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns the number of times when the variable x appears in exp<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>or (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;or(x:integer,y:integer) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>or(x,y)</i> returns the bitwise union of two integers (seen as bitvectors).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>owner (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;owner(x:any) → class<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>owner(x)</i> returns the class from which the object is an instance.&nbsp; It&nbsp; x<br>
+&nbsp; &nbsp; &nbsp; &nbsp;is an object, then <i>owner(x)</i> = <i>isa(x)</i> = the unique class <i>c</i> such that <i>x</i> %<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>instances(c)</i>.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>port! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;port!() → port<br>
+&nbsp; &nbsp; &nbsp; &nbsp;port!(s:string) → port<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;creates a port that is bound to a string. The first method&nbsp; creates&nbsp; an<br>
+&nbsp; &nbsp; &nbsp; &nbsp;empty string port that is used for writing. The value of the string as-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sociated&nbsp; with&nbsp; the &nbsp; port &nbsp; may &nbsp; be &nbsp; retrieved &nbsp; with &nbsp; the &nbsp; method<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string!(p:port). The second method transforms an existing string into a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;port that can be read. This is useful to read an expression stored in a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string, although the simpler method read(s:string) is most often enough<br>
+&nbsp; &nbsp; &nbsp; &nbsp;for the task.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>pretty_print (Language)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;pretty_print(x:any) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;performs the pretty_printing of x. For example, you&nbsp; can&nbsp; pretty&nbsp; print<br>
+&nbsp; &nbsp; &nbsp; &nbsp;CLAIRE&nbsp; code:&nbsp; if&nbsp; &lt;inst&gt; is a CLAIRE instruction <i>pretty_print</i>(`&lt;inst&gt;)<br>
+&nbsp; &nbsp; &nbsp; &nbsp;will print it nicely indented (the backquote here is to prevent the in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;struction from begin evaluated).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>princ, print (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:integer) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:float) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:string) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:char) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:symbol) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:bag) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:string, i:integer) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;princ(x:float, i:integer) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;print(x:any) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>print(x)</i>&nbsp; prints&nbsp; the&nbsp; entity x (x can be anything). <i>princ(x:integer or<br>
+&nbsp; &nbsp; &nbsp; &nbsp;float)</i> is equivalent to print(x). If x is a string /char / symbol/ bag,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;print(x)&nbsp; prints&nbsp; x without the “ / ‘ / ‘/ separator. <i>Princ(s:string,i)</i><br>
+&nbsp; &nbsp; &nbsp; &nbsp;prints the i first characters,&nbsp; while&nbsp; <i>princ(x:float,i:integer)</i>&nbsp; prints<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the float x with i figures after the decimal point.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>print_in_string (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;print_in_string() → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>print-in-string()</i>&nbsp; opens&nbsp; a&nbsp; new&nbsp; output&nbsp; port that will be stored as a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string.&nbsp; The user is given access to the string at the end of the tran-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;scription, when the call to <i>end_of_string()</i> returns this string.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>put (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;put(p:property, x:object, y:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;put(a:table, x:object, y:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;put(s:slot, x:object, y:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;put(s:symbol,x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>put(p,x,y)</i>&nbsp; is&nbsp; equivalent&nbsp; to <i>p(x) := y</i> but does not trigger the rules<br>
+&nbsp; &nbsp; &nbsp; &nbsp;associated to r or the inverse of r. Besides, this&nbsp; operation&nbsp; is&nbsp; per-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;formed&nbsp; without any type-checking. The method <i>put</i> is often used in con-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;junction with <i>propagate</i>. <i>put(s,x)</i> binds the symbol s to the object x.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>put_store (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;put_store(r1: relation, x:any, v:any,b:boolean) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;put_store(r,x,v,b) is equivalent to put(r,x,v) but also stores this up-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;date&nbsp; in the current world if b is true. The difference with the use of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the statement store(p) is that put_store allows&nbsp; the&nbsp; user&nbsp; to&nbsp; control<br>
+&nbsp; &nbsp; &nbsp; &nbsp;precisely&nbsp; which&nbsp; update should be backtracked. Put_store(r,x,y,b) does<br>
+&nbsp; &nbsp; &nbsp; &nbsp;nothing if r(x) = y.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>putc (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;putc(c:char, p:port) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>putc(c,p)</i> sends c to the output port p.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>random, random! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;random(n:integer) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;random (n:integer,m:integer) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;random (b:boolean) → boolean<br>
+&nbsp; &nbsp; &nbsp; &nbsp;random (l:bag) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;random!(n:integer) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>random(n)</i> returns an integer in (0 ..&nbsp; n-1),&nbsp; supposedly&nbsp; with&nbsp; uniform<br>
+&nbsp; &nbsp; &nbsp; &nbsp;probability.&nbsp; <i>random(n,m)</i>&nbsp; returns&nbsp; an&nbsp; integer&nbsp; between <i>n</i> and <i>m</i>.&nbsp; <i>ran-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;dom(b:Boolean)</i> returns a random boolean (true or false) is b&nbsp; is&nbsp; true,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;and&nbsp; false&nbsp; otherwise. <i>random(l:bag)</i> returns a random member of the bag<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>l</i>. <i>random!(n)</i> resets the seed for the random number generation process.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>range (Kernel), (Language)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;range(r:restriction) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;range(r:relation) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;range(v:global_variable) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;range(v:Variable) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;For a relation or a restriction r, <i>range(r)</i> returns&nbsp; the&nbsp; allowed&nbsp; type<br>
+&nbsp; &nbsp; &nbsp; &nbsp;for&nbsp; the&nbsp; values taken by r over its domain. For a variable v, <i>range(v)</i><br>
+&nbsp; &nbsp; &nbsp; &nbsp;is the allowed type for the value of v.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>read (Kernel), (Reader)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;read(p:property, x:object) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;read(p:port) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;read(s:string) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>read(p,x)</i> is strictly equivalent to p(x): it reads the value and raises<br>
+&nbsp; &nbsp; &nbsp; &nbsp;an exception if it is unknown. <i>read(p)</i> and <i>read(s)</i> both read an expres-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sion from the input port <i>p</i> or the string <i>s</i>.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>release (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;release() → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns&nbsp; a&nbsp; release&nbsp; number&nbsp; of&nbsp; your&nbsp; CLAIRE&nbsp; system&nbsp; (&lt;release&gt;.&lt;ver-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sion&gt;.&lt;revision&gt;).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>restrictions (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;restrictions(p:property) → list[restriction]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns&nbsp; the&nbsp; list&nbsp; of&nbsp; all restrictions of the property. A property is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;something a priori defined for all entities. A restriction is an actual<br>
+&nbsp; &nbsp; &nbsp; &nbsp;definition of this property for a given class (or type).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>safe (Optimize)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;safe(x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;safe(x)&nbsp; is&nbsp; semantically&nbsp; equivalent to x and is ignored by the inter-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;preter (x = safe(x)). On the other hand, this tells the&nbsp; compiler&nbsp; that<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the expression x must be compiled with the safe setting of the optimiz-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ing options. This is useful when a complete program requires high opti-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;mization&nbsp; settings for performance reasons but you still want to ensure<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that (say) overflow errors will be detected. A typical use would be<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;try safe( x * y) catch error MAXINT<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;to implement a bounded multiplication that can be placed&nbsp; in&nbsp; an&nbsp; opti-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;mized module.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>self_print (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;self_print(x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;this&nbsp; is the standard method for printing unnamed objects (objects that<br>
+&nbsp; &nbsp; &nbsp; &nbsp;are not in thing). It is called by default by printf on objects.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>set! (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;set!(s:collection) → set<br>
+&nbsp; &nbsp; &nbsp; &nbsp;set!(x:integer) → set[(0 .. 29)]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;set!(s) returns an enumeration of the collection s. The result&nbsp; is,&nbsp; by<br>
+&nbsp; &nbsp; &nbsp; &nbsp;definition,&nbsp; a set that contains exactly the members of s. An error oc-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cur if s is not finite, which can be tested with finite?(x).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;set!(x) returns a set that contains all integers i such that (x&nbsp; /&nbsp; 2<sup>i</sup>)<br>
+&nbsp; &nbsp; &nbsp; &nbsp;mod&nbsp; 2 = 1.&nbsp; This method considers x as the bitvector representation of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;a subset of (0 .. 29). The inverse is integer!.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>shell (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;shell(s:string) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Passes the command s to the operating system (the shell).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>show (Reader)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;show(x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The method <i>show</i> prints all the information it can possibly&nbsp; find&nbsp; about<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the&nbsp; object&nbsp; it has been called on: the value of all its slots are dis-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;played. This method is called by the debugger.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>shrink (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;shrink(x:list,n:integer) → list<br>
+&nbsp; &nbsp; &nbsp; &nbsp;shrink(x:string,n:integer) → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The method <i>shrink</i> truncates the list or the string so that&nbsp; its&nbsp; length<br>
+&nbsp; &nbsp; &nbsp; &nbsp;becomes&nbsp; n. This is a true side-effect and the value returned is always<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the same as the input. As a consequence, shrink(l,0) returns&nbsp; an&nbsp; empty<br>
+&nbsp; &nbsp; &nbsp; &nbsp;list that is different from the canonical empty list nil.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>sin (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sin(x:float) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>sin(x)</i> returns the sine of x (x is expressed in radians).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>size (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;size(l:bag) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;size(x:any) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>size(l)</i>&nbsp; gives&nbsp; the number of elements in l. If x is an abstract set (a<br>
+&nbsp; &nbsp; &nbsp; &nbsp;type, a class, ...) then size(x) denotes the number of elements of type<br>
+&nbsp; &nbsp; &nbsp; &nbsp;x.&nbsp; If&nbsp; the set is infinite, an exception will be raised. Note that the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;size of a list is not its length because of possible duplicates.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>slots (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;slots(c:class) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>slots(c)</i> returns the list of all slots that c may have<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>sort (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sort(m:method, l:list) → type[l]<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The method sort has two arguments: an order method m such that m(x,y) =<br>
+&nbsp; &nbsp; &nbsp; &nbsp;true&nbsp; if&nbsp; x&nbsp; &lt;= y and a list of objects to be sorted in ascending order<br>
+&nbsp; &nbsp; &nbsp; &nbsp;(according to m).&nbsp; The method returns the sorted list.&nbsp; The&nbsp; method&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;usually designated using @, as in sort(&lt; @ integer, list(1,2,8,3,4,3)).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;In&nbsp; CLAIRE&nbsp; 3,&nbsp; the compiler is able to “macroexpand” the definition of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sort (using a <i>quicksort</i> algorithm) when the method is&nbsp; a&nbsp; constant&nbsp; and<br>
+&nbsp; &nbsp; &nbsp; &nbsp;when&nbsp; the&nbsp; call&nbsp; to&nbsp; sort is used to define a single-instruction method<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that sorts a given list (with a void range). If we define:<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SortByf(l:list&lt;myObject&gt;) : void -&gt; sort(myOrder @ myObject, l)<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;The compiler will produce a&nbsp; very&nbsp; efficient&nbsp; implementation&nbsp; for&nbsp; this<br>
+&nbsp; &nbsp; &nbsp; &nbsp;method&nbsp; through&nbsp; code&nbsp; generation, which is not a trivial feature since<br>
+&nbsp; &nbsp; &nbsp; &nbsp;quicksort is doubly recursive. Notice that this optimization will&nbsp; only<br>
+&nbsp; &nbsp; &nbsp; &nbsp;take place if:<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;·&nbsp; the&nbsp; sort(...)&nbsp; message is the unique instruction of the method,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;which must return nothing<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;· the sorting method is an expression of the kind (p @ class)<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;· the list argument is the unique argument of the method<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>sqr (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sqr(x:integer) → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sqr(x:float) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns the square of x, that is x * x.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>sqrt (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;sqrt(x:float) → float<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns the square root of x. Returns an irrelevant&nbsp; value&nbsp; when&nbsp; x&nbsp; is<br>
+&nbsp; &nbsp; &nbsp; &nbsp;strictly negative.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>statistics (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;statistics() → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>statistics()</i>&nbsp; prints&nbsp; the&nbsp; memory&nbsp; situation of the CLAIRE system : the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;size of the evaluation stack as well as the string&nbsp; buffer&nbsp; (parameters<br>
+&nbsp; &nbsp; &nbsp; &nbsp;that&nbsp; may be changed with the -s option), and the memory allocation re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;turned by Go : the total allocated memory, the&nbsp; memory&nbsp; that&nbsp; is&nbsp; being<br>
+&nbsp; &nbsp; &nbsp; &nbsp;used and the number of Go calls to garbage collection.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>store (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;store(r1: relation, r2:relation ...) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;store(v: global_variable) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;store(a:array,n:integer,v:any,b:boolean) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;store(l:list,n:integer,v:any,b:boolean) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>store(r1,r2,...)</i>&nbsp; declares&nbsp; the relations (properties or tables) as de-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;feasible (using the world mechanism). If x&nbsp; is&nbsp; an&nbsp; array&nbsp; or&nbsp; a&nbsp; list,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>store(x,n,v,b)</i>&nbsp; is&nbsp; equivalent to x[n] := v but also stores this update<br>
+&nbsp; &nbsp; &nbsp; &nbsp;in the current world if b is true. As a&nbsp; syntactical&nbsp; convenience,&nbsp; the<br>
+&nbsp; &nbsp; &nbsp; &nbsp;argument&nbsp; b&nbsp; may be omitted if it is true. Note that there is a similar<br>
+&nbsp; &nbsp; &nbsp; &nbsp;method for properties called <i>put_store. store(v)</i> can be used to declare<br>
+&nbsp; &nbsp; &nbsp; &nbsp;a global_variable v as defeasible (notice that only one argument is al-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;lowed).<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>string! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string!(s:symbol) → string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string!(n:integer) → string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string!(x :float) → string<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>string</i>! converts a symbol, an integer or a float into a string. For ex-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ample&nbsp; <i>string</i>!(toto)&nbsp; returns "toto" and <i>string</i>!(12) returns "12".&nbsp; Un-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;like&nbsp; <i>make_string</i>,&nbsp; it&nbsp; returns&nbsp; the&nbsp; unqualified&nbsp; form&nbsp; (<i>string</i>!(Fran-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cois/agenda)&nbsp; = "agenda", whereas <i>make_string</i>(Francois/agenda) = "Fran-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cois/agenda").<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>substitution (Language)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;substitution(exp:any, v:Variable, f:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>substitution</i>(exp,v,f) returns exp where&nbsp; any&nbsp; occurrence&nbsp; of&nbsp; the&nbsp; free<br>
+&nbsp; &nbsp; &nbsp; &nbsp;variable&nbsp; v&nbsp; is substituted by f. Hence, if <i>occurrences</i>(exp,v) = 0 then<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>substitution</i>(exp,v,f) returns exp for any f.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>substring (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;substring(s:string, i:integer, j:integer) → string<br>
+&nbsp; &nbsp; &nbsp; &nbsp;substring(s1:string, s2:string, b:boolean) → integer<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>substring</i>(s,i,j) returns the substring of s starting at the i<sup>th</sup> charac-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ter and ending at the j<sup>th</sup>. For example, <i>substring</i>("CLAIRE",3,4) returns<br>
+&nbsp; &nbsp; &nbsp; &nbsp;"AI".&nbsp; If i is negative, the empty string is returned and if j&nbsp; is&nbsp; out<br>
+&nbsp; &nbsp; &nbsp; &nbsp;of&nbsp; bounds&nbsp; (j&nbsp; &gt;&nbsp; <i>length</i>(s)), then the system takes j=<i>length</i>(s).&nbsp; <i>sub-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;string</i>(s1,s2,b) returns i if s2 is a subsequence&nbsp; of&nbsp; s1,&nbsp; starting&nbsp; at<br>
+&nbsp; &nbsp; &nbsp; &nbsp;s1's&nbsp; i<sup>th</sup> character. The boolean b is there to allow case-sensitiveness<br>
+&nbsp; &nbsp; &nbsp; &nbsp;or not (identify 'a' and 'A' or not). When s2 cannot be identified with<br>
+&nbsp; &nbsp; &nbsp; &nbsp;any subsequence of s1, the returned value is 0.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>symbol! (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;symbol!(s:string) → symbol<br>
+&nbsp; &nbsp; &nbsp; &nbsp;symbol!(s:string, m:module) → symbol<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>symbol</i>!(s)&nbsp; returns&nbsp; the&nbsp; symbol&nbsp; associated to s in the <i>claire</i> module.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;For example, <i>symbol</i>!("toto") returns&nbsp; claire/«toto».&nbsp; <i>symbol</i>!(s,m)&nbsp; re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;turns the symbol associated to s in the module m.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;m.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>time_get, time_set, time_show, time_read
+(Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;time_get() → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;time_read() → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;time_set() → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;time_show() → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>time_set</i>()&nbsp; starts&nbsp; a clock, <i>time_get</i>() stops it and returns an integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;proportional to the elapsed time. Several such counters can be embedded<br>
+&nbsp; &nbsp; &nbsp; &nbsp;since&nbsp; they are stored in a stack. <i>time_show</i>() pretty prints the result<br>
+&nbsp; &nbsp; &nbsp; &nbsp;from <i>time_get</i>(). <i>time_read</i>() returns the elapsed time in micro-seconds,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;it&nbsp; can&nbsp; be used to read the value of the time counter without stopping<br>
+&nbsp; &nbsp; &nbsp; &nbsp;it.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>type! (Language)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;type!(x:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns the smallest type greater than x (with respect to the inclusion<br>
+&nbsp; &nbsp; &nbsp; &nbsp;order&nbsp; on&nbsp; the&nbsp; type&nbsp; lattice),&nbsp; that&nbsp; is the intersection of all types<br>
+&nbsp; &nbsp; &nbsp; &nbsp;greater or equal to x.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>U (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;U(s1:set, s2:set) → set<br>
+&nbsp; &nbsp; &nbsp; &nbsp;U(s:set, x:any) → any<br>
+&nbsp; &nbsp; &nbsp; &nbsp;U(x:any, y:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;U(s1,s2) returns the union of the two sets. Otherwise, U returns a type<br>
+&nbsp; &nbsp; &nbsp; &nbsp;which&nbsp; is the union of its two arguments. This constructor helps build-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ing types from elementary types.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>uniform? (Core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;uniform?(p:property) → boolean<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Tells if a property is uniform, that is contains only&nbsp; methods&nbsp; as&nbsp; re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;strictions, with the same types for arguments and ranges. Note that in-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;terface properties should be uniform, as well as&nbsp; all&nbsp; properties&nbsp; that<br>
+&nbsp; &nbsp; &nbsp; &nbsp;are used dynamically in a "diet" program.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>use_as_output (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;use_as_output(p:port) → port<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>uses_as_output</i>(p)&nbsp; changes&nbsp; the&nbsp; value&nbsp; of the current output (the port<br>
+&nbsp; &nbsp; &nbsp; &nbsp;where all print instructions will be sent) to p. It returns the&nbsp; previ-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ous&nbsp; port&nbsp; that was used as output which can thus be saved and possibly<br>
+&nbsp; &nbsp; &nbsp; &nbsp;restored later.<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>world?, commit, choice, backtrack (Kernel)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;world?() → integer<br>
+&nbsp; &nbsp; &nbsp; &nbsp;choice() → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;backtrack() → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;backtrack(n:integer) → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;commit() → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;backtrack0() → void<br>
+&nbsp; &nbsp; &nbsp; &nbsp;commit(n:integer) → void<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;These methods concern the version mechanism and should be used for&nbsp; hy-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;pothetical&nbsp; reasoning:&nbsp; each&nbsp; world corresponds to a state of the data-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;base. The slots s that are kept in the database&nbsp; are&nbsp; those&nbsp; for&nbsp; which<br>
+&nbsp; &nbsp; &nbsp; &nbsp;store(s)&nbsp; has&nbsp; been&nbsp; declared. These worlds are organized into a stack,<br>
+&nbsp; &nbsp; &nbsp; &nbsp;each world indexed by an integer (starting form&nbsp; 0).&nbsp; <i>world</i>?()&nbsp; returns<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the&nbsp; index of the current world; <i>choice</i>() creates a new world and steps<br>
+&nbsp; &nbsp; &nbsp; &nbsp;into it; <i>backtrack</i>() pops the current world and returns to the previous<br>
+&nbsp; &nbsp; &nbsp; &nbsp;one;&nbsp; <i>backtrack</i>(n)&nbsp; returns&nbsp; to the world numbered with n, and pops all<br>
+&nbsp; &nbsp; &nbsp; &nbsp;the intermediary worlds. The last three methods have a different behav-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ior&nbsp; since&nbsp; they are used to return to a previous world <i>without</i> forget-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ting what was asserted in the current world. The&nbsp; method&nbsp; <i>commit</i>()&nbsp; re-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;turns&nbsp; to&nbsp; the&nbsp; previous&nbsp; world&nbsp; but carries the updates that were made<br>
+&nbsp; &nbsp; &nbsp; &nbsp;within the current world; these updates&nbsp; now&nbsp; belong&nbsp; to&nbsp; the&nbsp; previous<br>
+&nbsp; &nbsp; &nbsp; &nbsp;world&nbsp; and&nbsp; anothe&nbsp;r call&nbsp; to <i>backtrack</i>() would undo them. On the other<br>
+&nbsp; &nbsp; &nbsp; &nbsp;hand, <i>backtrack0</i>() also return to the previous world, but&nbsp; the&nbsp; updates<br>
+&nbsp; &nbsp; &nbsp; &nbsp;from&nbsp; the current world are permanently confirmed, as if they would be-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;long to the world with index 0, which cannot be undone. Last, <i>commit</i>(n)<br>
+&nbsp; &nbsp; &nbsp; &nbsp;returns to the world numbered with n through successive applications of<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<i>commit</i>().<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<b>write (core)</b><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;write(p:property, x:object, y:any) → any<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;This&nbsp; method&nbsp; is&nbsp; used&nbsp; to&nbsp; store&nbsp; a&nbsp; value&nbsp; in&nbsp; a&nbsp; slot&nbsp; of&nbsp; &nbsp;an&nbsp; &nbsp;ob-<br>
+&nbsp; &nbsp; &nbsp; &nbsp;ject.<i>write</i>(p,x,y) is equivalent to p(x) := y.<br>
+<br>
+<br>
+<b>AUTHORS</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;Written by Yves Caseau and François Laburthe.<br>
+<br>
+<b>COPYRIGHT</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;Copyright © 1994-2023, Yves Caseau. All rights reserved.<br>
+<br>
+<b>SEE ALSO</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp;<a href="/7/claire.html" target="_blank">claire(7)</a><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;Full documentation<br>
+&nbsp; &nbsp; &nbsp; &nbsp;&lt;<a href="https://sites.google.com/view/claire4/home" target="_blank">https://sites.google.com/view/claire4/home/a>&gt;<br>
+<br>
+<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CLAIRE(3)
+</body>
+</html>
